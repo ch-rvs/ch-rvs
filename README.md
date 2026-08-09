@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>Shimray</title>
@@ -63,9 +62,9 @@
 
 <body>
 
-<header>🚀 Shimray's Website</header>
+<header> Shimray's Website</header>
 
-<h2>Welcome 😎</h2>
+<h2>Welcome </h2>
 
 <!-- 🖼️ PROFILE IMAGE -->
 <img src="https://ibb.co/HpVJ9dFs" alt="profile">
