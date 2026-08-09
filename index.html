@@ -1,81 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Our Time</title>  
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-<style>
-body {
-    margin:0;
-    font-family:Arial;
-    color:white;
-    text-align:center;
-    background: url("https://raw.githubusercontent.com/ch-rvs/ch-rvs/main/IMG_2620.jpeg") no-repeat center/cover;
-}
-
-.overlay {
-    background: rgba(0,0,0,0.6);
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-h1 {
-    font-size:32px;
-}
-
-.counter {
-    font-size:40px;
-    margin-top:20px;
-}
-
-nav a {
-    margin:10px;
-    padding:10px 15px;
-    background:white;
-    color:black;
-    text-decoration:none;
-    border-radius:6px;
-}
-</style>
+<title>Our Time</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="overlay">
+<!-- INTRO SCREEN -->
+<div id="intro">
+    <h1>For You ❤️</h1>
+    <button onclick="enterSite()">Enter</button>
+</div>
 
-<h1>Our Time Together</h1>
+<!-- PASSWORD -->
+<div id="lockScreen">
+    <h2>Enter Password</h2>
+    <input id="pass" type="password">
+    <button onclick="checkPass()">Unlock</button>
+</div>
 
-<div class="counter" id="days"></div>
-<div class="counter" id="seconds"></div>
+<!-- MAIN -->
+<div id="main">
 
-<p>Since 13 June 2026</p>
+<div class="bg"></div>
+<canvas id="hearts"></canvas>
 
-<nav>
-<a href="memories.html">Memories</a>
-<a href="note.html">Note</a>
-</nav>
+<h1 class="title">Our Time Together</h1>
+
+<div id="counter"></div>
+
+<div class="typing" id="note1"></div>
+<div class="typing" id="note2"></div>
+
+<!-- SLIDER -->
+<div class="slider" id="slider">
+    <img src="IMG_2620.jpeg">
+    <img src="IMG_1775.jpeg">
+    <img src="IMG_2616.jpeg">
+</div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
-<script>
-const start = new Date("June 13, 2026");
-
-function update(){
-    const now = new Date();
-    const diff = now - start;
-
-    const days = Math.floor(diff / (1000*60*60*24));
-    const seconds = Math.floor(diff / 1000);
-
-    document.getElementById("days").innerText = days + " days";
-    document.getElementById("seconds").innerText = seconds + " seconds";
-}
-
-setInterval(update,1000);
-update();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
