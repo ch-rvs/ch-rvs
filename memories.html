@@ -23,36 +23,89 @@ h1 {
     padding:15px;
 }
 
-.gallery img {
+.card {
+    position:relative;
+}
+
+.card img {
     width:100%;
     border-radius:10px;
-    transition:0.3s;
 }
 
-.gallery img:hover {
-    transform: scale(1.05);
+.caption {
+    font-size:12px;
+    color:#ccc;
 }
 
-a {
-    display:inline-block;
+.upload {
     margin:20px;
-    color:white;
-    text-decoration:none;
+}
+
+input, button {
+    padding:8px;
+    margin:5px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Memories</h1>
+<h1>Our Memories</h1>
 
-<div class="gallery">
-    <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/main/IMG_2620.jpeg">
-    <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/main/IMG_1775.jpeg">
-    <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/main/IMG_2616.jpeg">
+<div class="upload">
+    <input type="file" id="fileInput">
+    <input type="text" id="captionInput" placeholder="Write something about this">
+    <button onclick="addImage()">Add Memory</button>
+</div>
+
+<div class="gallery" id="gallery">
+
+    <!-- Your existing images -->
+    <div class="card">
+        <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/main/IMG_2620.jpeg">
+        <div class="caption">A moment worth keeping</div>
+    </div>
+
+    <div class="card">
+        <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/6655e3f0190346577a88a1ef94017170d8e7a784/IMG_1775.jpeg">
+        <div class="caption">One of our memories</div>
+    </div>
+
+    <div class="card">
+        <img src="https://raw.githubusercontent.com/ch-rvs/ch-rvs/6655e3f0190346577a88a1ef94017170d8e7a784/IMG_2616.jpeg">
+        <div class="caption">Another moment</div>
+    </div>
+
 </div>
 
 <a href="index.html">Back</a>
+
+<script>
+function addImage() {
+    const file = document.getElementById("fileInput").files[0];
+    const caption = document.getElementById("captionInput").value;
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const gallery = document.getElementById("gallery");
+
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <img src="${e.target.result}">
+            <div class="caption">${caption}</div>
+        `;
+
+        gallery.prepend(div);
+    };
+
+    reader.readAsDataURL(file);
+}
+</script>
 
 </body>
 </html>
