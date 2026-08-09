@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Shimray</title>
@@ -17,65 +18,88 @@
       background: rgba(0,0,0,0.5);
     }
 
-    h1 {
-      font-size: 40px;
-      margin-top: 50px;
-      color: cyan;
+    img {
+      width: 150px;
+      border-radius: 50%;
+      margin-top: 20px;
+      border: 3px solid cyan;
     }
 
-    p {
-      font-size: 18px;
-      opacity: 0.8;
+    .chatbox {
+      margin: 30px auto;
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .messages {
+      height: 150px;
+      overflow-y: auto;
+      text-align: left;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+
+    input {
+      width: 70%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 18px;
+      padding: 10px;
       border: none;
-      border-radius: 25px;
+      border-radius: 10px;
       background: cyan;
-      color: black;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: white;
-      transform: scale(1.1);
-    }
-
-    .card {
-      margin: 40px auto;
-      padding: 20px;
-      width: 80%;
-      max-width: 300px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  Shimray's Website
-</header>
+<header>🚀 Shimray's Website</header>
 
-<h1>Welcome</h1>
-<p>This is my upgraded site </p>
+<h2>Welcome 😎</h2>
 
-<button onclick="showMessage()">Click Me</button>
+<!-- 🖼️ PROFILE IMAGE -->
+<img src="https://ibb.co/HpVJ9dFs" alt="profile">
 
-<div class="card">
-  <h3>About Me</h3>
-  <p>I build websites from my phone</p>
+<p>This is my interactive website </p>
+
+<!-- 💬 CHATBOX -->
+<div class="chatbox">
+  <div class="messages" id="messages"></div>
+
+  <input type="text" id="msg" placeholder="Type message...">
+  <button onclick="sendMsg()">Send</button>
 </div>
 
 <script>
-  function showMessage() {
-    alert(" You're now interacting with my website!");
-  }
+function sendMsg() {
+  let input = document.getElementById("msg");
+  let message = input.value;
+
+  if(message.trim() === "") return;
+
+  let chat = document.getElementById("messages");
+
+  chat.innerHTML += "<p> You: " + message + "</p>";
+
+  // Simple bot reply
+  setTimeout(() => {
+    chat.innerHTML += "<p> Bot: Nice message </p>";
+    chat.scrollTop = chat.scrollHeight;
+  }, 500);
+
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+}
 </script>
 
 </body>
