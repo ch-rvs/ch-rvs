@@ -1,24 +1,43 @@
-/* INTRO */
-function enterSite() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("lockScreen").style.display = "flex";
-}
+// Make sure functions are available globally
+window.enterSite = function () {
+    const intro = document.getElementById("intro");
+    const lock = document.getElementById("lockScreen");
 
-/* PASSWORD */
-function checkPass() {
-    let p = document.getElementById("pass").value;
-    if (p === "130626") {
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("main").style.display = "block";
+    if (intro && lock) {
+        intro.style.display = "none";
+        lock.style.display = "flex";
+    }
+};
+
+// PASSWORD CHECK
+window.checkPass = function () {
+    const input = document.getElementById("pass");
+    const lock = document.getElementById("lockScreen");
+    const main = document.getElementById("main");
+    const music = document.getElementById("music");
+
+    if (!input) return;
+
+    if (input.value === "130626") {
+        lock.style.display = "none";
+        main.style.display = "block";
+
         startEverything();
-        document.getElementById("music").play();
+
+        // Try playing music (may require user interaction)
+        if (music) {
+            music.play().catch(() => {});
+        }
     } else {
         alert("Wrong password");
     }
-}
+};
 
-/* COUNTER */
+// COUNTER
 function updateCounter() {
+    const el = document.getElementById("counter");
+    if (!el) return;
+
     let start = new Date("June 13, 2026 00:00:00");
     let now = new Date();
 
@@ -31,31 +50,36 @@ function updateCounter() {
     let mo = Math.floor(diff / (86400000 * 30)) % 12;
     let y = Math.floor(diff / (86400000 * 365));
 
-    document.getElementById("counter").innerText =
-        `${y}y ${mo}m ${d}d ${h}h ${m}m ${s}s`;
+    el.innerText = `${y}y ${mo}m ${d}d ${h}h ${m}m ${s}s`;
 
-    if (new Date().getDate() == 13) {
+    // 13th special color
+    if (new Date().getDate() === 13) {
         document.body.style.background =
             "linear-gradient(45deg,#ff4d6d,#ff99ac)";
     }
 }
 
-/* TYPING */
+// TYPING EFFECT
 function typeText(el, text, speed = 35) {
+    if (!el) return;
+
+    el.innerHTML = "";
     let i = 0;
-    function t() {
+
+    function type() {
         if (i < text.length) {
             el.innerHTML += text[i++];
-            setTimeout(t, speed);
+            setTimeout(type, speed);
         }
     }
-    t();
+
+    type();
 }
 
-/* START */
+// START EVERYTHING
 function startEverything() {
-    setInterval(updateCounter, 1000);
     updateCounter();
+    setInterval(updateCounter, 1000);
 
     typeText(
         document.getElementById("note1"),
@@ -65,16 +89,18 @@ function startEverything() {
     setTimeout(() => {
         typeText(
             document.getElementById("note2"),
-            "Elomi, whatever you're going through... don’t face it alone. Give everything to God. I believe everything will be okay. I'm always here ❤️"
+            "Elomi, whatever you're going through, don’t face it alone. Give your worries to God. I believe everything will be okay. I'm always here for you ❤️"
         );
     }, 4000);
 
     startHearts();
 }
 
-/* HEART ANIMATION */
+// HEART ANIMATION
 function startHearts() {
     const canvas = document.getElementById("hearts");
+    if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
 
     canvas.width = window.innerWidth;
