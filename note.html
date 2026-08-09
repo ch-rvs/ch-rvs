@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Note</title>
+<title>Our Notes</title>
 
 <style>
 body {
+    margin:0;
     background:black;
     color:white;
     font-family:Arial;
     text-align:center;
-    padding:40px;
+    padding:20px;
 }
 
-p {
+h1 {
+    margin-bottom:20px;
+}
+
+textarea {
+    width:90%;
     max-width:500px;
-    margin:auto;
-    line-height:1.6;
+    height:120px;
+    border-radius:10px;
+    padding:10px;
+    border:none;
 }
 
-a {
-    color:white;
+button {
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    background:white;
+    color:black;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.notes {
+    margin-top:30px;
+}
+
+.note {
+    background:#111;
+    padding:10px;
+    margin:10px auto;
+    max-width:500px;
+    border-radius:10px;
+    text-align:left;
 }
 </style>
 </head>
 
 <body>
 
-<h1>For You</h1>
+<h1>Our Notes</h1>
 
-<p>
-I didn’t just want to say things.  
-I wanted to build something that stays.  
+<textarea id="noteInput" placeholder="Write something..."></textarea><br>
+<button onclick="addNote()">Save Note</button>
 
-Every second here means something to me  
-because it includes you.  
-
-No matter how time moves,  
-this is one thing I’m sure of —  
-I want you in it.
-</p>
-
-<br><br>
+<div class="notes" id="notes"></div>
 
 <a href="index.html">Back</a>
+
+<script>
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function displayNotes() {
+    const container = document.getElementById("notes");
+    container.innerHTML = "";
+
+    notes.forEach(n => {
+        const div = document.createElement("div");
+        div.className = "note";
+        div.innerText = n;
+        container.appendChild(div);
+    });
+}
+
+function addNote() {
+    const input = document.getElementById("noteInput");
+    const text = input.value;
+
+    if (text.trim() === "") return;
+
+    notes.push(text);
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    input.value = "";
+    displayNotes();
+}
+
+displayNotes();
+</script>
 
 </body>
 </html>
