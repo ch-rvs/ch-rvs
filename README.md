@@ -74,7 +74,7 @@
 
 <script>
   function showMessage() {
-    alert("🔥 You're now interacting with my website!");
+    alert(" You're now interacting with my website!");
   }
 </script>
 
