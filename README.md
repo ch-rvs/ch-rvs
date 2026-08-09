@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>Shimray🔥</title>
+  <title>Shimray</title>
 
   <style>
     body {
@@ -60,11 +59,11 @@
 <body>
 
 <header>
-  🚀 Shimray's Website
+  Shimray's Website
 </header>
 
-<h1>Welcome 😎</h1>
-<p>This is my upgraded site 🔥</p>
+<h1>Welcome</h1>
+<p>This is my upgraded site </p>
 
 <button onclick="showMessage()">Click Me</button>
 
