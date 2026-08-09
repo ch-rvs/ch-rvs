@@ -69,7 +69,7 @@
 
 <div class="card">
   <h3>About Me</h3>
-  <p>I build websites from my phone 📱</p>
+  <p>I build websites from my phone</p>
 </div>
 
 <script>
