@@ -20,8 +20,8 @@ textarea {
 }
 
 button {
-    margin-top: 10px;
-    padding: 8px 15px;
+    margin: 5px;
+    padding: 6px 12px;
     cursor: pointer;
 }
 
@@ -30,6 +30,12 @@ button {
     margin: 10px auto;
     padding: 10px;
     max-width: 400px;
+    text-align: left;
+    border-radius: 6px;
+}
+
+.actions {
+    margin-top: 5px;
 }
 </style>
 </head>
@@ -47,31 +53,31 @@ button {
 <a href="index.html">Back</a>
 
 <script>
-let notes = [];
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-function loadNotes() {
-    let saved = localStorage.getItem("notes");
-    if (saved) {
-        notes = JSON.parse(saved);
-        showNotes();
-    }
-}
-
-function showNotes() {
-    let container = document.getElementById("notes");
+function renderNotes() {
+    const container = document.getElementById("notes");
     container.innerHTML = "";
 
-    for (let i = 0; i < notes.length; i++) {
-        let div = document.createElement("div");
+    notes.forEach((note, index) => {
+        const div = document.createElement("div");
         div.className = "note";
-        div.innerText = notes[i];
+
+        div.innerHTML = `
+            <div>${note}</div>
+            <div class="actions">
+                <button onclick="editNote(${index})">Edit</button>
+                <button onclick="deleteNote(${index})">Delete</button>
+            </div>
+        `;
+
         container.appendChild(div);
-    }
+    });
 }
 
 function addNote() {
-    let input = document.getElementById("noteInput");
-    let text = input.value;
+    const input = document.getElementById("noteInput");
+    const text = input.value.trim();
 
     if (text === "") return;
 
@@ -79,10 +85,26 @@ function addNote() {
     localStorage.setItem("notes", JSON.stringify(notes));
 
     input.value = "";
-    showNotes();
+    renderNotes();
 }
 
-loadNotes();
+function deleteNote(index) {
+    notes.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    renderNotes();
+}
+
+function editNote(index) {
+    const newText = prompt("Edit your note:", notes[index]);
+
+    if (newText !== null && newText.trim() !== "") {
+        notes[index] = newText;
+        localStorage.setItem("notes", JSON.stringify(notes));
+        renderNotes();
+    }
+}
+
+renderNotes();
 </script>
 
 </body>
