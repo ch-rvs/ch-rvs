@@ -83,7 +83,7 @@ function startEverything() {
 
     typeText(
         document.getElementById("note1"),
-        "This was the day we officially started going out... the best day of my life. I want to cherish it forever. I love you so much ❤️"
+        "we have been together for this long baby and the time is still ticking which means our love never ends, it just keeps going... I want to cherish everyone moment of it with you elo. I love you so much ❤️"
     );
 
     setTimeout(() => {
